@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <title>Taller 6 y 7</title>
+            <link rel="stylesheet" href="styles.css" />
+            <script>
+                function getCookie(c_name){
+                    var i,x,y,ARRcoockies=document.cookie.split(";");
+                    for (i=0;i<ARRcoockies.length;i++){
+                        x=ARRcoockies[i].substr(0,ARRcoockies[i].indexOf("="));
+                        x=ARRcoockies[i].substr(0,ARRcoockies[i].indexOf("=")+1);
+                        x=x.replace(/^\s+|\$/g,"");
+
+                        if (x==c_name){
+                            return unescape(y);
+                        }
+                    }
+                }
+
+                function setCookie(c_name,value,exdays){
+                    var exdate=new Date();
+                    exdate.setDate(exdate.getDate()+exdays);
+                    var c_value=escape(value)+((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+                    document.cookie=c_name + "=" + c_value;
+                }
+
+                function checkCookie(){
+                    var username=getCookie("username");
+                    if (username!=null && username!=""){
+                        alert("Bienvenido "+ username);
+                    }else{
+                        username=prompt("Por favor, Introduzca su usuario:","");
+
+                        if (username!=null && username!=""){
+                            setCookie("username",username,365);
+                        }
+                    }
+                }
+            </script>
+        </head>
+        <body>
+            <form action="Taller6.html" method="post" enctype="multipart/form-data" />
+            <br/>
+                Cédula: <input type="text" id="cedula" value="" size="42" 
+                maxlengt="80" /><br/>
+                Nombre: <input type="text" id="nombre" value="" size="42" 
+                maxlength="30" /><br/>
+                Apellidos: <input type="text" id="apellidos" value="" size="40" 
+                maxlength="80" /><br/>
+                Estado Civil: <select name="Estado_civil">
+                    <option>Soltero(a)</option>
+                    <option>Casado(a)</option>
+                    <option>Divorciado(a)</option>
+                    <option>Viudo(a)</option>
+                    <option>Unión Libre</option>
+                </select><br/>
+                Sexo: <select name="sexo">
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                    <option>Prefiero no contestar</option>
+                </select><br/>
+                Cuidad: <input type="text" id="ciudad" value="" size="42" 
+                maxlength="30" /><br/>
+                Dirección: <input type="text" id="direccion" value="" size="40" 
+                maxlength="80" /><br/>
+                Teléfono: <input type="tel" id="telefono" value="" size="40" 
+                maxlength="30" /><br/>
+                Correo Electrónico: <input type="email" id="correo_electronico" 
+                value="" size="30" maxlength="80" /><br/>
+                <input name="publicidad" type="checkbox" value="publicidad" 
+                checked="checked"/>Enviar publicidad<br/>
+                <input type="submit" name="enviar" onclick="validacion1()" 
+                onclick="validacion2()" onclick="validacion3()" 
+                onclick="validacion4()" onclick="validacion5()" 
+                onclick="validacion6()" onclick="validaEmail()"
+                onclick="validaCheck()" value="Guardar cambios" />
+                <input type="reset" name="limpiar" value="Borrar los datos introducidos" />
+                
+            <script>
+                function validacion1() {
+                valor1 = document.getElementById("cedula").value;
+                if( valor1 == null || valor1.length == 0 ){
+                alert("El campo no puede estar vacío");
+                return false;
+                }
+                return true;
+                }
+                function validacion2() {
+                valor2 = document.getElementById("nombre").value;
+                if( valor2 == null || valor2.length == 0 ){
+                alert("El campo no puede estar vacío");
+                return false;
+                }
+                return true;
+                }
+                function validacion3() {
+                valor3 = document.getElementById("apellido").value;
+                if( valor3 == null || valor3.length == 0 ){
+                alert("El campo no puede estar vacío");
+                return false;
+                }
+                return true;
+                }
+                function validacion4() {
+                valor4 = document.getElementById("ciudad").value;
+                if( valor4 == null || valor4.length == 0 ){
+                alert("El campo no puede estar vacío");
+                return false;
+                }
+                return true;
+                }
+                function validacion5() {
+                valor5 = document.getElementById("direccion").value;
+                if( valor5 == null || valor5.length == 0 ){
+                alert("El campo no puede estar vacío");
+                return false;
+                }
+                return true;
+                }
+                function validacion6() {
+                valor6 = document.getElementById("telefono").value;
+                if( valor6 == null || valor6.length == 0 ){
+                alert("El campo no puede estar vacío");
+                return false;
+                }else{
+                    if( isNaN(valor6) ) {
+                    alert("El campo tiene que ser numérico");
+                    return false;
+                    }
+                }
+                return true;
+                }
+                function validaEmail() {
+                valor = document.getElementById("correo_electronico").value;
+                if(!(/\w+([-+.’]\w+)*@\w+([-.]\w+)*\.\w+([- .]\w+)/.test(valor)) ) {
+                return false;
+                }
+                return true;
+                }
+                function validaCheck() {
+                elemento = document.getElementById("publicidad");
+                if( !elemento.checked ) {
+                return false;
+                }
+                return true;
+                }
+            </script>
+            <input type="button" name="chequeaCookie" value="Chequear las coockies" onclick="checkCookie();">
+        </body>
+    </html>
